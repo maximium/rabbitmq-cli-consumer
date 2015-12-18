@@ -9,6 +9,6 @@ type CommandFactory struct {
 	Args []string
 }
 
-func (me CommandFactory) Create(body string) *exec.Cmd {
-	return exec.Command(me.Cmd, append(me.Args, body)...)
+func (me CommandFactory) Create(body string, key string) *exec.Cmd {
+	return exec.Command(me.Cmd, append(me.Args, body, key)...)
 }

@@ -6,7 +6,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/ricbra/rabbitmq-cli-consumer/command"
+	"github.com/maximium/rabbitmq-cli-consumer/command"
 	"github.com/maximium/rabbitmq-cli-consumer/config"
 	"github.com/streadway/amqp"
 	"log"
@@ -53,8 +53,8 @@ func (c *Consumer) Consume() {
 
 				input = b.Bytes()
 			}
-
-			cmd := c.Factory.Create(base64.StdEncoding.EncodeToString(input))
+			key := d.RoutingKey
+			cmd := c.Factory.Create(base64.StdEncoding.EncodeToString(input), key)
 			if c.Executer.Execute(cmd) {
 				d.Ack(true)
 			} else {
